@@ -13,7 +13,7 @@ function ResumePreview({ template, themeOptions }) {
     page: { 
       format: 'A4',
       orientation: 'portrait',
-      margin: 20
+      margin: 10 // Reduced margin for better centering
     }
   })
 
@@ -44,7 +44,7 @@ function ResumePreview({ template, themeOptions }) {
 
       <div 
         ref={targetRef}
-        className="resume-preview-container a4"
+        className="resume-preview-container a4 flex justify-center items-start" // Added flex and alignment classes
         style={{
           backgroundColor: themeOptions.backgroundColor,
           color: themeOptions.textColor,
@@ -52,10 +52,15 @@ function ResumePreview({ template, themeOptions }) {
             ? 'Inter, sans-serif' 
             : themeOptions.fontFamily === 'serif' 
               ? 'Merriweather, serif' 
-              : 'Roboto Mono, monospace'
+              : 'Roboto Mono, monospace',
+          minHeight: '842px', //Approximation of A4 height in px
+          width: '595px' //Approximation of A4 width in px
+
         }}
       >
-        {renderTemplate()}
+        <div style={{width: '100%', textAlign: 'center'}}> {/*Added container for centering*/}
+          {renderTemplate()}
+        </div>
       </div>
 
       <div className="mt-4 flex flex-col sm:flex-row items-center gap-4 justify-between border-t border-gray-100 pt-4">
