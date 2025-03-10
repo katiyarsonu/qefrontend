@@ -124,93 +124,6 @@
 @media (min-width: 768px) and (max-width: 1200px) {
   .resume-preview-container.a4 {
     transform-origin: top center;
-
-/* Improved Resume Preview */
-.resume-preview-container {
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
-  background: white;
-  margin: 0 auto;
-  width: 100%;
-  max-width: 790px;
-  min-height: 1050px;
-  position: relative;
-}
-
-/* Ensure proper PDF content positioning */
-.pdf-content {
-  padding: 30px;
-  background-color: white;
-  position: relative;
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-/* A4 paper simulation for preview */
-.resume-preview-container.a4 {
-  aspect-ratio: 1 / 1.414;
-  width: 100%;
-  max-width: 794px;
-  margin: 0 auto;
-}
-
-/* Improved download button */
-.btn-primary {
-  background-color: var(--primary-color, #3b82f6);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  font-weight: 500;
-  transition: all 0.2s;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  border: none;
-  cursor: pointer;
-}
-
-.btn-primary:hover {
-  background-color: var(--primary-color-hover, #2563eb);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-.btn-primary:active {
-  transform: translateY(0);
-  box-shadow: none;
-}
-
-/* Enhance responsiveness of the preview */
-@media print {
-  .resume-preview-container {
-    box-shadow: none;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-  }
-}
-
-/* Add subtle animation to resume preview */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.resume-section {
-  animation: fadeIn 0.3s ease-out forwards;
-}
-
-.resume-section:nth-child(2) { animation-delay: 0.05s; }
-.resume-section:nth-child(3) { animation-delay: 0.1s; }
-.resume-section:nth-child(4) { animation-delay: 0.15s; }
-.resume-section:nth-child(5) { animation-delay: 0.2s; }
-
     transform: scale(0.9);
     margin-bottom: -60px;
   }
@@ -219,7 +132,6 @@
 /* Fix date input appearance */
 input[type="date"] {
   appearance: none;
-  -webkit-appearance: none;
   background-color: white;
   padding: 0.625rem;
   border-radius: var(--radius-sm);
@@ -227,15 +139,6 @@ input[type="date"] {
   font-size: 0.875rem;
   line-height: 1.25rem;
   color: var(--text-primary);
-  position: relative;
-  max-height: 38px;
-}
-
-input[type="date"]::-webkit-datetime-edit,
-input[type="date"]::-webkit-inner-spin-button,
-input[type="date"]::-webkit-clear-button {
-  color: var(--text-primary);
-  position: relative;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
@@ -243,25 +146,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   background-color: transparent;
   padding: 0.2rem;
   cursor: pointer;
-  position: absolute;
-  right: 8px;
-  height: 20px;
-  width: 20px;
 }
 
 input[type="date"]:focus {
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
-}
-
-/* Add improved styling for invalid inputs */
-input:invalid {
-  border-color: #ff5252 !important;
-}
-
-input:invalid:focus {
-  box-shadow: 0 0 0 3px rgba(255, 82, 82, 0.15) !important;
 }
 
 /* Better touch target sizes for mobile */
