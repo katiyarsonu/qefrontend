@@ -10,10 +10,19 @@ function ResumePreview({ template, themeOptions }) {
   const resumeRef = useRef(null)
   const { toPDF, targetRef } = usePDF({
     filename: `${personalInfo?.name?.replace(/\s+/g, '_') || 'Resume'}.pdf`,
-    options: {
-      format: 'a4',
-      margin: { top: 10, right: 10, bottom: 10, left: 10 },
+    page: {
+      // Use A4 dimensions
+      width: 210,
+      height: 297,
+      margin: 10,
+      format: 'a4'
     },
+    resolution: 1.5,
+    canvas: {
+      // Optimize quality
+      mimeType: 'image/png',
+      qualityRatio: 1
+    }
   })
 
   const renderTemplate = () => {

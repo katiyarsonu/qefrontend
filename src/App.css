@@ -193,7 +193,7 @@ input[type="checkbox"] {
   color: #22c55e;
 }
 
-/* Print styles */
+/* Print styles are now handled in PdfStyles.css */
 @media print {
   body * {
     visibility: hidden;
@@ -201,28 +201,5 @@ input[type="checkbox"] {
   
   .resume-preview-container, .resume-preview-container * {
     visibility: visible;
-  }
-  
-  .resume-preview-container {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 210mm;
-    height: auto;
-    box-shadow: none;
-    transform: scale(1) !important;
-    margin: 0 !important;
-    padding: 10mm !important;
-  }
-  
-  /* Ensure proper text alignment */
-  .text-center {
-    text-align: center !important;
-  }
-  
-  /* Fix margins and padding */
-  .resume-preview-container.a4 {
-    margin: 0 !important;
-    padding: 10mm !important;
   }
 }

@@ -1,25 +1,50 @@
 
 /* PDF-specific styles that will only apply when printing/downloading */
 @media print {
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background-color: white !important;
+  }
+
   .resume-preview-container {
     position: absolute !important;
     left: 0 !important;
     top: 0 !important;
+    width: 100% !important;
+    height: auto !important;
     margin: 0 !important;
-    padding: 10mm !important;
+    padding: 20px 30px !important;
     transform: none !important;
     box-shadow: none !important;
+    border: none !important;
+    max-width: 100% !important;
+    background-color: white !important;
   }
   
-  /* Ensure text alignment and margins match the example */
+  /* Remove any background colors or borders */
+  .resume-preview-container::after {
+    display: none !important;
+  }
+  
+  /* Main content alignment */
+  .resume-content {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+  }
+  
+  /* Header styling */
   .resume-header {
     text-align: center !important;
+    margin-bottom: 15px !important;
   }
   
   .resume-name {
     margin-top: 0 !important;
     font-size: 24px !important;
     font-weight: bold !important;
+    margin-bottom: 8px !important;
   }
   
   .resume-contact-info {
@@ -27,14 +52,16 @@
     justify-content: center !important;
     gap: 10px !important;
     margin-bottom: 15px !important;
+    flex-wrap: wrap !important;
   }
   
+  /* Section styling */
   .section-title {
     text-transform: uppercase !important;
     color: #2563eb !important;
     font-weight: bold !important;
     margin-top: 15px !important;
-    margin-bottom: 5px !important;
+    margin-bottom: 8px !important;
     border-bottom: 1px solid #e5e7eb !important;
   }
   
@@ -43,7 +70,7 @@
     page-break-inside: avoid !important;
   }
   
-  /* Ensure bullet points are properly formatted */
+  /* List formatting */
   ul {
     margin-top: 5px !important;
     margin-bottom: 5px !important;
@@ -68,5 +95,30 @@
   /* Prevent unnecessary page breaks */
   * {
     page-break-inside: avoid !important;
+  }
+  
+  /* Scale content to fit on one page */
+  .resume-content {
+    transform-origin: top left !important;
+    transform: scale(1) !important;
+  }
+  
+  /* Fix text alignment */
+  p, div, span, h1, h2, h3, h4, h5, h6 {
+    text-align: left !important;
+  }
+  
+  /* Override any Tailwind spacing that might cause overflow */
+  .p-4, .p-5, .p-6, .px-4, .px-5, .px-6, .py-4, .py-5, .py-6 {
+    padding: 0 !important;
+  }
+  
+  .m-4, .m-5, .m-6, .mx-4, .mx-5, .mx-6, .my-4, .my-5, .my-6 {
+    margin: 0 !important;
+  }
+  
+  /* Ensure proper content spacing */
+  .resume-content > div {
+    margin-bottom: 10px !important;
   }
 }
