@@ -1,0 +1,72 @@
+
+/* PDF-specific styles that will only apply when printing/downloading */
+@media print {
+  .resume-preview-container {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    margin: 0 !important;
+    padding: 10mm !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Ensure text alignment and margins match the example */
+  .resume-header {
+    text-align: center !important;
+  }
+  
+  .resume-name {
+    margin-top: 0 !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+  }
+  
+  .resume-contact-info {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .section-title {
+    text-transform: uppercase !important;
+    color: #2563eb !important;
+    font-weight: bold !important;
+    margin-top: 15px !important;
+    margin-bottom: 5px !important;
+    border-bottom: 1px solid #e5e7eb !important;
+  }
+  
+  .resume-section {
+    margin-bottom: 15px !important;
+    page-break-inside: avoid !important;
+  }
+  
+  /* Ensure bullet points are properly formatted */
+  ul {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    padding-left: 20px !important;
+  }
+  
+  li {
+    margin-bottom: 3px !important;
+  }
+  
+  /* Date alignment to right side */
+  .date-range {
+    float: right !important;
+    font-weight: normal !important;
+  }
+  
+  /* Job titles and institutions should be bold */
+  .job-title, .institution-name {
+    font-weight: bold !important;
+  }
+  
+  /* Prevent unnecessary page breaks */
+  * {
+    page-break-inside: avoid !important;
+  }
+}

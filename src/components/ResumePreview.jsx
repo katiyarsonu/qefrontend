@@ -6,15 +6,14 @@ import DeployButton from './DeployButton'
 import useResumeStore from '../store/resumeStore'
 
 function ResumePreview({ template, themeOptions }) {
-  const { resumeData, sectionOrder } = useResumeStore()
+  const { resumeData, sectionOrder, personalInfo } = useResumeStore()
   const resumeRef = useRef(null)
   const { toPDF, targetRef } = usePDF({
-    filename: 'resume.pdf',
-    page: { 
-      format: 'A4',
-      orientation: 'portrait',
-      margin: 20
-    }
+    filename: `${personalInfo?.name?.replace(/\s+/g, '_') || 'Resume'}.pdf`,
+    options: {
+      format: 'a4',
+      margin: { top: 10, right: 10, bottom: 10, left: 10 },
+    },
   })
 
   const renderTemplate = () => {

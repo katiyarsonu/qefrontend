@@ -207,10 +207,22 @@ input[type="checkbox"] {
     position: absolute;
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
+    width: 210mm;
+    height: auto;
     box-shadow: none;
     transform: scale(1) !important;
     margin: 0 !important;
+    padding: 10mm !important;
+  }
+  
+  /* Ensure proper text alignment */
+  .text-center {
+    text-align: center !important;
+  }
+  
+  /* Fix margins and padding */
+  .resume-preview-container.a4 {
+    margin: 0 !important;
+    padding: 10mm !important;
   }
 }
