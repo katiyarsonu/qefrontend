@@ -1,95 +1,62 @@
-import { useState } from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import Dashboard from './components/Dashboard'
+import Landing from './components/Landing'
+import Login from './components/Login'
+import Signup from './components/Signup'
+import axios from 'axios'
+import './App.css'
+
 import ResumeForm from './components/ResumeForm'
 import ResumePreview from './components/ResumePreview'
 import TemplateSelector from './components/TemplateSelector'
 import Sidebar from './components/Sidebar'
 import useResumeStore from './store/resumeStore'
-import './App.css'
 
 function App() {
-  const [selectedTemplate, setSelectedTemplate] = useState(() => {
-    try {
-      const savedTemplate = localStorage.getItem('selectedTemplate')
-      return savedTemplate || 'modern'
-    } catch (error) {
-      console.error("Error loading template from localStorage:", error)
-      return 'modern'
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) {
+      checkAuth(token)
+    } else {
+      setLoading(false)
     }
-  })
-  
-  const [themeOptions, setThemeOptions] = useState(() => {
+  }, [])
+
+  const checkAuth = async (token) => {
     try {
-      const savedTheme = localStorage.getItem('themeOptions')
-      return savedTheme ? JSON.parse(savedTheme) : {
-        fontFamily: 'sans',
-        primaryColor: '#3b82f6',
-        backgroundColor: '#ffffff',
-        textColor: '#333333'
+      const response = await axios.get('http://0.0.0.0:5000/api/auth/me', {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      if (response.data) {
+        setIsAuthenticated(true)
       }
     } catch (error) {
-      console.error("Error loading theme options from localStorage:", error)
-      return {
-        fontFamily: 'sans',
-        primaryColor: '#3b82f6',
-        backgroundColor: '#ffffff',
-        textColor: '#333333'
-      }
+      localStorage.removeItem('token')
+    } finally {
+      setLoading(false)
     }
-  })
-
-  const isSidebarCollapsed = useResumeStore((state) => state.isSidebarCollapsed)
-
-  // Handle template change
-  const handleTemplateChange = (template) => {
-    setSelectedTemplate(template)
-    localStorage.setItem('selectedTemplate', template)
   }
 
-  // Handle theme options change
-  const handleThemeChange = (newThemeOptions) => {
-    const updatedThemeOptions = { ...themeOptions, ...newThemeOptions }
-    setThemeOptions(updatedThemeOptions)
-    localStorage.setItem('themeOptions', JSON.stringify(updatedThemeOptions))
+  if (loading) {
+    return <div>Loading...</div>
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Sidebar />
-      
-      <div 
-        className={`transition-all duration-300 ease-in-out ${
-          isSidebarCollapsed ? 'md:ml-16' : 'md:ml-64'
-        }`}
-      >
-        <header className="bg-white shadow-sm">
-          <div className="max-w-7xl mx-auto px-3 py-3 sm:px-6 sm:py-4 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-0">
-            <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Resume Builder</h1>
-            <TemplateSelector 
-              selectedTemplate={selectedTemplate} 
-              onTemplateChange={handleTemplateChange}
-              themeOptions={themeOptions}
-              onThemeChange={handleThemeChange}
-            />
-          </div>
-        </header>
-        
-        <main className="max-w-7xl mx-auto px-2 sm:px-4 py-4 sm:py-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
-            <div className="lg:w-1/2 w-full mb-6 lg:mb-0">
-              <ResumeForm />
-            </div>
-            <div className="lg:w-1/2 w-full">
-              <div className="sticky top-4">
-                <ResumePreview 
-                  template={selectedTemplate}
-                  themeOptions={themeOptions}
-                />
-              </div>
-            </div>
-          </div>
-        </main>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+        <Route path="/signup" element={<Signup setIsAuthenticated={setIsAuthenticated} />} />
+        <Route 
+          path="/dashboard/*" 
+          element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />} 
+        />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
