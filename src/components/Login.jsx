@@ -1,7 +1,16 @@
+// api.js
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: 'http://0.0.0.0:5000/api', // Set your base URL here
+});
+
+export default api;
+
 
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import axios from 'axios'
+import api from './api'; // Import the axios instance
 
 function Login({ setIsAuthenticated }) {
   const [email, setEmail] = useState('')
@@ -12,7 +21,7 @@ function Login({ setIsAuthenticated }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://0.0.0.0:5000/api/auth/login', {
+      const response = await api.post('/auth/login', {
         email,
         password
       })

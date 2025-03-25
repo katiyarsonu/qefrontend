@@ -1,7 +1,7 @@
 
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import axios from 'axios'
+import api from '../api/axios'
 
 function Signup({ setIsAuthenticated }) {
   const [formData, setFormData] = useState({
@@ -16,7 +16,7 @@ function Signup({ setIsAuthenticated }) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('http://0.0.0.0:5000/api/auth/register', formData)
+      const response = await api.post('/auth/register', formData)
       localStorage.setItem('token', response.data.token)
       setIsAuthenticated(true)
       navigate('/dashboard')

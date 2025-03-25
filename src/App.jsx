@@ -4,7 +4,7 @@ import Dashboard from './components/Dashboard'
 import Landing from './components/Landing'
 import Login from './components/Login'
 import Signup from './components/Signup'
-import axios from 'axios'
+import api from './api/axios'
 import './App.css'
 
 import ResumeForm from './components/ResumeForm'
@@ -28,9 +28,7 @@ function App() {
 
   const checkAuth = async (token) => {
     try {
-      const response = await axios.get('http://0.0.0.0:5000/api/auth/me', {
-        headers: { Authorization: `Bearer ${token}` }
-      })
+      const response = await api.get('/auth/me')
       if (response.data) {
         setIsAuthenticated(true)
       }
