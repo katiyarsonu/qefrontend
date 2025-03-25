@@ -1,0 +1,180 @@
+
+QuickEmployee API Documentation
+Authentication APIs
+Login
+Endpoint: POST /api/auth/login
+
+
+URL: http://localhost:5000/api/auth/login
+
+
+Body (JSON):
+
+ {
+  "email": "katiyarsonu2110@gmail.com",
+  "password": "password1234"
+}
+
+
+Register
+Endpoint: POST /api/auth/register
+
+
+URL: http://localhost:5000/api/auth/register
+
+
+Body (JSON):
+
+ {
+  "email": "katiyarsonu2110@gmail.com",
+  "password": "password1234",
+  "firstName": "Sonu",
+  "lastName": "Katiyar"
+}
+
+
+Get User Info
+Endpoint: GET /api/auth/me
+
+
+URL: http://localhost:5000/api/auth/me
+
+
+Authorization: Bearer Token
+
+
+
+Resume APIs
+Upload Resume
+Endpoint: POST /api/resume
+
+
+URL: http://localhost:5000/api/resume
+
+
+Authorization: Bearer Token
+
+
+Body (form-data):
+
+
+title: sonu resume
+
+
+content: Software developer with experience...
+
+
+file: /home/sonu/Downloads/freepik__a-white-man-28-years-old-with-glasses-and-brown-ha__4670.png
+
+
+Get Resume
+Endpoint: GET /api/resume
+
+
+URL: http://localhost:5000/api/resume
+
+
+Authorization: Bearer Token
+
+
+
+AI & Scoring APIs
+Get Resume Suggestions
+Endpoint: POST /api/ai/suggestions
+
+
+URL: http://localhost:5000/api/ai/suggestions
+
+
+Authorization: Bearer Token
+
+
+Body (JSON):
+
+ {
+  "resumeText": "I am a software developer with 2 years experience in JavaScript."
+}
+
+
+Score Resume
+Endpoint: POST /api/scoring/score
+
+
+URL: http://localhost:5000/api/scoring/score
+
+
+Authorization: Bearer Token
+
+
+Body (JSON):
+
+ {
+  "resumeText": "I know JavaScript and have experience"
+}
+
+
+
+PDF Parsing APIs
+Extract Data from PDF
+Endpoint: POST /api/parser/extract-pdf
+
+
+URL: http://localhost:5000/api/parser/extract-pdf
+
+
+Authorization: Bearer Token
+
+
+Body (form-data):
+
+
+pdf: /home/sonu/Downloads/John Doe.pdf
+
+
+Parse Text
+Endpoint: POST /api/parser/parse
+
+
+URL: http://localhost:5000/api/parser/parse
+
+
+Authorization: Bearer Token
+
+
+
+Template APIs
+Create a Template
+Endpoint: POST /api/template
+
+
+URL: http://localhost:5000/api/template
+
+
+Authorization: Bearer Token
+
+
+Body (JSON):
+
+ {
+  "name": "Basic Template",
+  "content": "<h1>{{name}}</h1><p>{{skills}}</p>"
+}
+
+
+Get All Templates
+Endpoint: GET /api/template
+
+
+URL: http://localhost:5000/api/template
+
+
+
+Export API
+Export Resume
+Endpoint: GET /api/export/{resume_id}
+
+
+URL: http://localhost:5000/api/export/67e1643272f15307137dd8cf
+
+
+Authorization: Bearer Token
