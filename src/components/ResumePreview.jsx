@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import ModernTemplate from './templates/ModernTemplate'
 import ClassicTemplate from './templates/ClassicTemplate'
 import { usePDF } from 'react-to-pdf'
-import DeployButton from './DeployButton'
+
 import useResumeStore from '../store/resumeStore'
 
 function ResumePreview({ template, themeOptions }) {
@@ -70,7 +70,7 @@ function ResumePreview({ template, themeOptions }) {
         <div>
           <p className="text-sm text-gray-500">Share your resume with the world</p>
         </div>
-        <DeployButton />
+     
       </div>
     </div>
   )
