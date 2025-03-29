@@ -473,8 +473,8 @@
 
 // export default Signup
 
-
 //new design 
+
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Eye, EyeOff, UserPlus, ChevronRight } from "lucide-react";
@@ -596,31 +596,33 @@ function Signup({ setIsAuthenticated }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col md:flex-row">
+    <div className="min-h-screen bg-teal-50 flex flex-col md:flex-row">
       {/* Left side - Decorative with enhanced visuals */}
-      <div className="hidden md:flex md:w-1/2 bg-gradient-to-br from-indigo-600 to-blue-500 p-12 relative overflow-hidden">
+      <div className="hidden md:flex md:w-1/2 bg-gradient-to-br from-teal-50 to-[#008C80] p-8 lg:p-12 relative overflow-hidden">
         {/* Decorative elements */}
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-white/10 rounded-full filter blur-xl"></div>
-          <div className="absolute bottom-1/3 right-1/3 w-48 h-48 bg-blue-300/20 rounded-full filter blur-lg"></div>
-          <div className="absolute top-2/3 left-1/3 w-32 h-32 bg-indigo-300/20 rounded-full filter blur-md"></div>
+          <div className="absolute top-1/4 left-1/4 w-48 sm:w-64 h-48 sm:h-64 bg-white/10 rounded-full filter blur-xl"></div>
+          <div className="absolute bottom-1/3 right-1/3 w-32 sm:w-48 h-32 sm:h-48 bg-teal-300/20 rounded-full filter blur-lg"></div>
+          <div className="absolute top-2/3 left-1/3 w-24 sm:w-32 h-24 sm:h-32 bg-[#008C80]/20 rounded-full filter blur-md"></div>
         </div>
-        
+
         <div className="relative z-10 max-w-md text-white">
-          <h1 className="text-5xl font-bold mb-6">Welcome to our platform</h1>
-          <p className="text-xl opacity-90 mb-8 leading-relaxed">
-            Join thousands of users who have already transformed their experience with our tools and services.
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+            Welcome to QuickEmploye
+          </h1>
+          <p className="text-lg sm:text-xl opacity-90 mb-8 leading-relaxed">
+            Join thousands of job seekers who have transformed their careers with our smart resume tools.
           </p>
-          
+
           {/* Feature points */}
-          <div className="space-y-4 mt-12">
+          <div className="space-y-4 mt-8 sm:mt-12">
             <div className="flex items-center">
               <div className="w-6 h-6 rounded-full bg-white/25 flex items-center justify-center mr-3">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
               </div>
-              <p className="text-white/90">Easy to use interface</p>
+              <p className="text-white/90 text-sm sm:text-base">Intuitive resume builder</p>
             </div>
             <div className="flex items-center">
               <div className="w-6 h-6 rounded-full bg-white/25 flex items-center justify-center mr-3">
@@ -628,7 +630,7 @@ function Signup({ setIsAuthenticated }) {
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
               </div>
-              <p className="text-white/90">Secure data storage</p>
+              <p className="text-white/90 text-sm sm:text-base">Secure ATS optimization</p>
             </div>
             <div className="flex items-center">
               <div className="w-6 h-6 rounded-full bg-white/25 flex items-center justify-center mr-3">
@@ -636,12 +638,12 @@ function Signup({ setIsAuthenticated }) {
                   <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                 </svg>
               </div>
-              <p className="text-white/90">24/7 customer support</p>
+              <p className="text-white/90 text-sm sm:text-base">24/7 career support</p>
             </div>
           </div>
-          
+
           {/* Animated dots at bottom */}
-          <div className="flex space-x-3 mt-16">
+          <div className="flex space-x-3 mt-12 sm:mt-16">
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
@@ -654,13 +656,13 @@ function Signup({ setIsAuthenticated }) {
       </div>
 
       {/* Right side - Enhanced Signup form */}
-      <div className="flex-1 flex items-center justify-center p-6">
-        <div className="w-full max-w-md bg-white rounded-xl shadow-xl p-8 transition-all duration-300 hover:shadow-2xl">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-800">Create Account</h2>
-            <p className="text-gray-600 mt-2">Join our community and start your journey</p>
+      <div className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-8">
+        <div className="w-full max-w-md bg-white rounded-xl shadow-xl p-6 sm:p-8 transition-all duration-300 hover:shadow-2xl">
+          <div className="text-center mb-6 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Create Account</h2>
+            <p className="text-gray-600 mt-2 text-sm sm:text-base">Start your job search journey today</p>
           </div>
-          
+
           {errors.general && (
             <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-md">
               <div className="flex">
@@ -675,9 +677,9 @@ function Signup({ setIsAuthenticated }) {
               </div>
             </div>
           )}
-          
+
           <form onSubmit={handleSubmit} className="space-y-5">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="firstName">
                   First Name
@@ -687,8 +689,8 @@ function Signup({ setIsAuthenticated }) {
                   type="text"
                   value={formData.firstName}
                   onChange={(e) => handleChange("firstName", e.target.value)}
-                  className={`w-full h-12 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ${
-                    errors.firstName ? "border-red-500 bg-red-50" : "border-gray-300"
+                  className={`w-full h-12 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#008C80] transition-all ${
+                    errors.firstName ? "border-red-500 bg-red-50" : "border-gray-300 hover:border-teal-400"
                   }`}
                   placeholder="John"
                   required
@@ -704,8 +706,8 @@ function Signup({ setIsAuthenticated }) {
                   type="text"
                   value={formData.lastName}
                   onChange={(e) => handleChange("lastName", e.target.value)}
-                  className={`w-full h-12 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ${
-                    errors.lastName ? "border-red-500 bg-red-50" : "border-gray-300"
+                  className={`w-full h-12 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#008C80] transition-all ${
+                    errors.lastName ? "border-red-500 bg-red-50" : "border-gray-300 hover:border-teal-400"
                   }`}
                   placeholder="Doe"
                   required
@@ -713,7 +715,7 @@ function Signup({ setIsAuthenticated }) {
                 {errors.lastName && <p className="mt-1 text-red-600 text-xs">{errors.lastName}</p>}
               </div>
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="email">
                 Email Address
@@ -724,14 +726,14 @@ function Signup({ setIsAuthenticated }) {
                 value={formData.email}
                 onChange={(e) => handleChange("email", e.target.value)}
                 placeholder="john@example.com"
-                className={`w-full h-12 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ${
-                  errors.email ? "border-red-500 bg-red-50" : "border-gray-300"
+                className={`w-full h-12 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#008C80] transition-all ${
+                  errors.email ? "border-red-500 bg-red-50" : "border-gray-300 hover:border-teal-400"
                 }`}
                 required
               />
               {errors.email && <p className="mt-1 text-red-600 text-xs">{errors.email}</p>}
             </div>
-            
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="password">
                 Password
@@ -742,8 +744,8 @@ function Signup({ setIsAuthenticated }) {
                   type={showPassword ? "text" : "password"}
                   value={formData.password}
                   onChange={(e) => handleChange("password", e.target.value)}
-                  className={`w-full h-12 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all pr-10 ${
-                    errors.password ? "border-red-500 bg-red-50" : "border-gray-300"
+                  className={`w-full h-12 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#008C80] transition-all pr-10 ${
+                    errors.password ? "border-red-500 bg-red-50" : "border-gray-300 hover:border-teal-400"
                   }`}
                   placeholder="••••••••"
                   required
@@ -762,10 +764,10 @@ function Signup({ setIsAuthenticated }) {
                 <p className="mt-1 text-xs text-gray-500">Password must be at least 8 characters</p>
               )}
             </div>
-            
+
             <button
               type="submit"
-              className="w-full h-12 mt-6 bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-lg hover:from-indigo-700 hover:to-blue-600 transition-all shadow-md hover:shadow-lg flex items-center justify-center font-medium"
+              className="w-full h-12 mt-6 bg-gradient-to-r from-[#008C80] to-teal-600 text-white rounded-lg hover:from-teal-700 hover:to-[#008C80] transition-all shadow-md hover:shadow-lg flex items-center justify-center font-medium disabled:bg-teal-400 disabled:cursor-not-allowed"
               disabled={isLoading}
             >
               {isLoading ? (
@@ -775,14 +777,14 @@ function Signup({ setIsAuthenticated }) {
                 </div>
               ) : (
                 <div className="flex items-center">
-                  <UserPlus className="mr-2 h-5 w-5" /> 
+                  <UserPlus className="mr-2 h-5 w-5" />
                   <span>Create Account</span>
                 </div>
               )}
             </button>
           </form>
-          
-          <div className="mt-8 space-y-4">
+
+          <div className="mt-6 sm:mt-8 space-y-4">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-300"></div>
@@ -791,9 +793,9 @@ function Signup({ setIsAuthenticated }) {
                 <span className="px-4 bg-white text-gray-500">Or continue with</span>
               </div>
             </div>
-            
-            <div className="grid grid-cols-2 gap-4">
-              <button className="h-12 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all flex items-center justify-center shadow-sm">
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <button className="h-12 border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-[#008C80] transition-all flex items-center justify-center shadow-sm text-sm sm:text-base">
                 <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
                   <path
                     d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -815,25 +817,25 @@ function Signup({ setIsAuthenticated }) {
                 </svg>
                 Google
               </button>
-              <button className="h-12 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all flex items-center justify-center shadow-sm">
-                <svg className="mr-2 h-5 w-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+              <button className="h-12 border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-[#008C80] transition-all flex items-center justify-center shadow-sm text-sm sm:text-base">
+                <svg className="mr-2 h-5 w-5 text-[#008C80]" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
                 </svg>
                 Facebook
               </button>
             </div>
-            
+
             <p className="text-center text-sm mt-6 text-gray-600">
               Already have an account?{" "}
-              <Link to="/login" className="text-indigo-600 font-medium hover:text-indigo-500 inline-flex items-center">
+              <Link to="/login" className="text-[#008C80] font-medium hover:text-teal-700 inline-flex items-center">
                 Sign in <ChevronRight className="h-4 w-4 ml-1" />
               </Link>
             </p>
           </div>
-          
+
           {/* Additional trust indicators */}
-          <div className="mt-8 pt-6 border-t border-gray-200">
-            <div className="flex justify-center text-xs text-gray-500 space-x-4">
+          <div className="mt-6 sm:mt-8 pt-6 border-t border-gray-200">
+            <div className="flex flex-wrap justify-center text-xs text-gray-500 gap-3 sm:gap-4">
               <span className="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1 text-green-500" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
