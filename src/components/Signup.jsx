@@ -475,16 +475,10 @@
 
 
 //new design 
-"use client"
-
-import { useState } from "react"
-import { useNavigate, Link } from "react-router-dom"
-import { Eye, EyeOff, UserPlus, ChevronRight } from "lucide-react"
-import api from "../api/axios"
-
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { Eye, EyeOff, UserPlus, ChevronRight } from "lucide-react";
+import api from "../api/axios";
 
 function Signup({ setIsAuthenticated }) {
   const [formData, setFormData] = useState({
@@ -492,39 +486,39 @@ function Signup({ setIsAuthenticated }) {
     password: "",
     firstName: "",
     lastName: "",
-  })
+  });
   const [errors, setErrors] = useState({
     email: "",
     password: "",
     firstName: "",
     lastName: "",
     general: "",
-  })
-  const [isLoading, setIsLoading] = useState(false)
-  const navigate = useNavigate()
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   // Password visibility toggle
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword)
-  }
+    setShowPassword(!showPassword);
+  };
 
   // Validation functions
   const isStringOnly = (value) => {
-    return /^[A-Za-z\s]+$/.test(value)
-  }
+    return /^[A-Za-z\s]+$/.test(value);
+  };
 
   const isValidEmail = (email) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-  }
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
 
   const isValidPassword = (password) => {
-    return password.length >= 8
-  }
+    return password.length >= 8;
+  };
 
   // Handle input changes with real-time validation
   const handleChange = (field, value) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
+    setFormData((prev) => ({ ...prev, [field]: value }));
 
     // Real-time validation
     switch (field) {
@@ -533,88 +527,125 @@ function Signup({ setIsAuthenticated }) {
         setErrors((prev) => ({
           ...prev,
           [field]: value && !isStringOnly(value) ? "Only letters are allowed" : "",
-        }))
-        break
+        }));
+        break;
       case "email":
         setErrors((prev) => ({
           ...prev,
           email: value && !isValidEmail(value) ? "Invalid email format" : "",
-        }))
-        break
+        }));
+        break;
       case "password":
         setErrors((prev) => ({
           ...prev,
           password: value && !isValidPassword(value) ? "Password must be at least 8 characters" : "",
-        }))
-        break
+        }));
+        break;
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     // Check for empty fields
-    const newErrors = {}
-    let isValid = true
+    const newErrors = {};
+    let isValid = true;
 
     if (!formData.firstName) {
-      newErrors.firstName = "This field is required"
-      isValid = false
+      newErrors.firstName = "This field is required";
+      isValid = false;
     }
     if (!formData.lastName) {
-      newErrors.lastName = "This field is required"
-      isValid = false
+      newErrors.lastName = "This field is required";
+      isValid = false;
     }
     if (!formData.email) {
-      newErrors.email = "This field is required"
-      isValid = false
+      newErrors.email = "This field is required";
+      isValid = false;
     }
     if (!formData.password) {
-      newErrors.password = "This field is required"
-      isValid = false
+      newErrors.password = "This field is required";
+      isValid = false;
     }
 
     // Check existing validation errors
     if (errors.firstName || errors.lastName || errors.email || errors.password) {
-      isValid = false
+      isValid = false;
     }
 
     if (!isValid) {
-      setErrors((prev) => ({ ...prev, ...newErrors }))
-      return
+      setErrors((prev) => ({ ...prev, ...newErrors }));
+      return;
     }
 
-    setIsLoading(true)
+    setIsLoading(true);
     try {
-      const response = await api.post("/auth/register", formData)
-      localStorage.setItem("token", response.data.token)
-      setIsAuthenticated(true)
-      navigate("/dashboard")
+      const response = await api.post("/auth/register", formData);
+      localStorage.setItem("token", response.data.token);
+      setIsAuthenticated(true);
+      navigate("/dashboard");
     } catch (err) {
       if (err.response?.data?.message === "User already exists") {
-        setErrors((prev) => ({ ...prev, general: "User already exists" }))
+        setErrors((prev) => ({ ...prev, general: "User already exists" }));
       } else {
-        setErrors((prev) => ({ ...prev, general: "Registration failed" }))
+        setErrors((prev) => ({ ...prev, general: "Registration failed" }));
       }
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
-    <div className="min-h-screen w-full flex flex-col md:flex-row">
-      {/* Left side - Decorative */}
-      <div className="hidden md:flex md:w-1/2 bg-gradient-to-br from-primary/90 to-primary/50 p-12 items-center justify-center">
-        <div className="max-w-md text-white">
-          <h1 className="text-4xl font-bold mb-6">Join Us Today</h1>
-          <p className="text-lg opacity-90 mb-8">
-            Create your account and start your journey with us. It only takes a minute to get started.
+    <div className="min-h-screen bg-gray-50 flex flex-col md:flex-row">
+      {/* Left side - Decorative with enhanced visuals */}
+      <div className="hidden md:flex md:w-1/2 bg-gradient-to-br from-indigo-600 to-blue-500 p-12 relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-white/10 rounded-full filter blur-xl"></div>
+          <div className="absolute bottom-1/3 right-1/3 w-48 h-48 bg-blue-300/20 rounded-full filter blur-lg"></div>
+          <div className="absolute top-2/3 left-1/3 w-32 h-32 bg-indigo-300/20 rounded-full filter blur-md"></div>
+        </div>
+        
+        <div className="relative z-10 max-w-md text-white">
+          <h1 className="text-5xl font-bold mb-6">Welcome to our platform</h1>
+          <p className="text-xl opacity-90 mb-8 leading-relaxed">
+            Join thousands of users who have already transformed their experience with our tools and services.
           </p>
-          <div className="flex space-x-3 mt-12">
+          
+          {/* Feature points */}
+          <div className="space-y-4 mt-12">
+            <div className="flex items-center">
+              <div className="w-6 h-6 rounded-full bg-white/25 flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <p className="text-white/90">Easy to use interface</p>
+            </div>
+            <div className="flex items-center">
+              <div className="w-6 h-6 rounded-full bg-white/25 flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <p className="text-white/90">Secure data storage</p>
+            </div>
+            <div className="flex items-center">
+              <div className="w-6 h-6 rounded-full bg-white/25 flex items-center justify-center mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <p className="text-white/90">24/7 customer support</p>
+            </div>
+          </div>
+          
+          {/* Animated dots at bottom */}
+          <div className="flex space-x-3 mt-16">
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
-                className="h-2 w-2 rounded-full bg-white opacity-60 animate-pulse"
+                className="h-2 w-2 rounded-full bg-white opacity-70 animate-pulse"
                 style={{ animationDelay: `${i * 0.3}s` }}
               />
             ))}
@@ -622,115 +653,148 @@ function Signup({ setIsAuthenticated }) {
         </div>
       </div>
 
-      {/* Right side - Signup form */}
+      {/* Right side - Enhanced Signup form */}
       <div className="flex-1 flex items-center justify-center p-6">
-        <Card className="w-full max-w-md shadow-lg border-0 shadow-primary/5">
-          <CardHeader className="space-y-1">
-            <CardTitle className="text-2xl font-bold text-center">Create Account</CardTitle>
-            <CardDescription className="text-center">Enter your information to create your account</CardDescription>
-          </CardHeader>
-          <CardContent>
-            {errors.general && (
-              <div className="bg-destructive/10 text-destructive p-3 rounded-md mb-4 text-sm flex items-center">
-                <span>{errors.general}</span>
-              </div>
-            )}
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium" htmlFor="firstName">
-                    First Name
-                  </label>
-                  <Input
-                    id="firstName"
-                    type="text"
-                    value={formData.firstName}
-                    onChange={(e) => handleChange("firstName", e.target.value)}
-                    className={`h-11 ${errors.firstName ? "border-destructive" : ""}`}
-                    required
-                  />
-                  {errors.firstName && <p className="text-destructive text-xs">{errors.firstName}</p>}
+        <div className="w-full max-w-md bg-white rounded-xl shadow-xl p-8 transition-all duration-300 hover:shadow-2xl">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-800">Create Account</h2>
+            <p className="text-gray-600 mt-2">Join our community and start your journey</p>
+          </div>
+          
+          {errors.general && (
+            <div className="bg-red-50 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-md">
+              <div className="flex">
+                <div className="flex-shrink-0">
+                  <svg className="h-5 w-5 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                  </svg>
                 </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium" htmlFor="lastName">
-                    Last Name
-                  </label>
-                  <Input
-                    id="lastName"
-                    type="text"
-                    value={formData.lastName}
-                    onChange={(e) => handleChange("lastName", e.target.value)}
-                    className={`h-11 ${errors.lastName ? "border-destructive" : ""}`}
-                    required
-                  />
-                  {errors.lastName && <p className="text-destructive text-xs">{errors.lastName}</p>}
+                <div className="ml-3">
+                  <p className="text-sm">{errors.general}</p>
                 </div>
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium" htmlFor="email">
-                  Email
-                </label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => handleChange("email", e.target.value)}
-                  placeholder="name@example.com"
-                  className={`h-11 ${errors.email ? "border-destructive" : ""}`}
-                  required
-                />
-                {errors.email && <p className="text-destructive text-xs">{errors.email}</p>}
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium" htmlFor="password">
-                  Password
-                </label>
-                <div className="relative">
-                  <Input
-                    id="password"
-                    type={showPassword ? "text" : "password"}
-                    value={formData.password}
-                    onChange={(e) => handleChange("password", e.target.value)}
-                    className={`h-11 pr-10 ${errors.password ? "border-destructive" : ""}`}
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={togglePasswordVisibility}
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-muted-foreground hover:text-foreground"
-                  >
-                    {showPassword ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
-                    <span className="sr-only">{showPassword ? "Hide password" : "Show password"}</span>
-                  </button>
-                </div>
-                {errors.password && <p className="text-destructive text-xs">{errors.password}</p>}
-              </div>
-              <Button type="submit" className="w-full h-11 mt-2 transition-all" disabled={isLoading}>
-                {isLoading ? (
-                  <div className="flex items-center">
-                    <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                    Creating account...
-                  </div>
-                ) : (
-                  <div className="flex items-center">
-                    <UserPlus className="mr-2 h-4 w-4" /> Create Account
-                  </div>
-                )}
-              </Button>
-            </form>
-          </CardContent>
-          <CardFooter className="flex flex-col space-y-4">
-            <div className="relative w-full">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-card px-2 text-muted-foreground">Or continue with</span>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3">
-              <Button variant="outline" className="h-11">
-                <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
+          )}
+          
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="firstName">
+                  First Name
+                </label>
+                <input
+                  id="firstName"
+                  type="text"
+                  value={formData.firstName}
+                  onChange={(e) => handleChange("firstName", e.target.value)}
+                  className={`w-full h-12 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ${
+                    errors.firstName ? "border-red-500 bg-red-50" : "border-gray-300"
+                  }`}
+                  placeholder="John"
+                  required
+                />
+                {errors.firstName && <p className="mt-1 text-red-600 text-xs">{errors.firstName}</p>}
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="lastName">
+                  Last Name
+                </label>
+                <input
+                  id="lastName"
+                  type="text"
+                  value={formData.lastName}
+                  onChange={(e) => handleChange("lastName", e.target.value)}
+                  className={`w-full h-12 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ${
+                    errors.lastName ? "border-red-500 bg-red-50" : "border-gray-300"
+                  }`}
+                  placeholder="Doe"
+                  required
+                />
+                {errors.lastName && <p className="mt-1 text-red-600 text-xs">{errors.lastName}</p>}
+              </div>
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="email">
+                Email Address
+              </label>
+              <input
+                id="email"
+                type="email"
+                value={formData.email}
+                onChange={(e) => handleChange("email", e.target.value)}
+                placeholder="john@example.com"
+                className={`w-full h-12 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all ${
+                  errors.email ? "border-red-500 bg-red-50" : "border-gray-300"
+                }`}
+                required
+              />
+              {errors.email && <p className="mt-1 text-red-600 text-xs">{errors.email}</p>}
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="password">
+                Password
+              </label>
+              <div className="relative">
+                <input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  value={formData.password}
+                  onChange={(e) => handleChange("password", e.target.value)}
+                  className={`w-full h-12 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all pr-10 ${
+                    errors.password ? "border-red-500 bg-red-50" : "border-gray-300"
+                  }`}
+                  placeholder="••••••••"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700"
+                >
+                  {showPassword ? <Eye className="h-5 w-5" /> : <EyeOff className="h-5 w-5" />}
+                  <span className="sr-only">{showPassword ? "Hide password" : "Show password"}</span>
+                </button>
+              </div>
+              {errors.password && <p className="mt-1 text-red-600 text-xs">{errors.password}</p>}
+              {!errors.password && (
+                <p className="mt-1 text-xs text-gray-500">Password must be at least 8 characters</p>
+              )}
+            </div>
+            
+            <button
+              type="submit"
+              className="w-full h-12 mt-6 bg-gradient-to-r from-indigo-600 to-blue-500 text-white rounded-lg hover:from-indigo-700 hover:to-blue-600 transition-all shadow-md hover:shadow-lg flex items-center justify-center font-medium"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <div className="flex items-center">
+                  <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                  <span>Creating account...</span>
+                </div>
+              ) : (
+                <div className="flex items-center">
+                  <UserPlus className="mr-2 h-5 w-5" /> 
+                  <span>Create Account</span>
+                </div>
+              )}
+            </button>
+          </form>
+          
+          <div className="mt-8 space-y-4">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-4 bg-white text-gray-500">Or continue with</span>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <button className="h-12 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all flex items-center justify-center shadow-sm">
+                <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
                   <path
                     d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                     fill="#4285F4"
@@ -750,25 +814,50 @@ function Signup({ setIsAuthenticated }) {
                   <path d="M1 1h22v22H1z" fill="none" />
                 </svg>
                 Google
-              </Button>
-              <Button variant="outline" className="h-11">
-                <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+              </button>
+              <button className="h-12 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all flex items-center justify-center shadow-sm">
+                <svg className="mr-2 h-5 w-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
                 </svg>
                 Facebook
-              </Button>
+              </button>
             </div>
-            <p className="text-center text-sm mt-4">
+            
+            <p className="text-center text-sm mt-6 text-gray-600">
               Already have an account?{" "}
-              <Link to="/login" className="text-primary font-medium hover:underline inline-flex items-center">
-                Sign in <ChevronRight className="h-3 w-3 ml-1" />
+              <Link to="/login" className="text-indigo-600 font-medium hover:text-indigo-500 inline-flex items-center">
+                Sign in <ChevronRight className="h-4 w-4 ml-1" />
               </Link>
             </p>
-          </CardFooter>
-        </Card>
+          </div>
+          
+          {/* Additional trust indicators */}
+          <div className="mt-8 pt-6 border-t border-gray-200">
+            <div className="flex justify-center text-xs text-gray-500 space-x-4">
+              <span className="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
+                Secure Connection
+              </span>
+              <span className="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v-1l1-1 1-1 .257-.257A6 6 0 1118 8zm-6-4a1 1 0 100 2h2a1 1 0 100-2h-2z" clipRule="evenodd" />
+                </svg>
+                Privacy Protected
+              </span>
+              <span className="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                </svg>
+                24/7 Support
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Signup
+export default Signup;

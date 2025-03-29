@@ -183,7 +183,6 @@
 
 
 //new design 
-
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Eye, EyeOff, LogIn, ChevronRight, Star, ArrowRight } from "lucide-react";
@@ -234,24 +233,28 @@ function Login({ setIsAuthenticated }) {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col bg-gray-50 relative overflow-hidden">
-      {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-blue-500/5 z-0" />
+    <div className="min-h-screen w-full flex flex-col bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+        <div className="absolute top-0 right-0 bg-blue-500/10 w-96 h-96 rounded-full -mr-48 -mt-48 blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 bg-indigo-500/10 w-96 h-96 rounded-full -ml-48 -mb-48 blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 bg-purple-500/5 w-96 h-96 rounded-full transform -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
+      </div>
 
       {/* Sticky header */}
       <header
         className={`sticky top-0 z-20 px-6 py-4 transition-all duration-300 ${
-          isScrolled ? "bg-white shadow-md" : "bg-transparent"
+          isScrolled ? "bg-white/90 backdrop-blur-sm shadow-md" : "bg-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <Link to="/" className="text-2xl font-bold flex items-center">
-            Quick<span className="text-blue-600">Employe</span>
+            Quick<span className="text-blue-600 font-extrabold">Employe</span>
           </Link>
           <div className="flex space-x-4">
             <Link
               to="/signup"
-              className="text-blue-600 hover:underline flex items-center"
+              className="text-blue-600 hover:text-blue-800 hover:underline font-medium flex items-center transition-colors"
             >
               Sign Up <ArrowRight className="h-4 w-4 ml-1" />
             </Link>
@@ -264,22 +267,38 @@ function Login({ setIsAuthenticated }) {
         {/* Left side - Decorative */}
         <div className="hidden md:flex md:w-1/2 p-12 items-center justify-center">
           <div className="max-w-md text-gray-800">
-            <h1 className="text-4xl font-bold mb-6">Welcome Back</h1>
-            <p className="text-lg mb-8">
+            <h1 className="text-4xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Welcome Back</h1>
+            <p className="text-lg mb-8 text-gray-700">
               Sign in to access your resume builder, ATS scores, and work
-              history.
+              history. Boost your job search today.
             </p>
-            {/* Trust indicator */}
-            <div className="flex items-center bg-blue-500/10 rounded-lg py-2 px-4 w-fit">
-              <Star className="h-5 w-5 text-yellow-400 mr-2" />
-              <span>Trusted by 1.5M+ job seekers</span>
+            {/* Trust indicators */}
+            <div className="space-y-4">
+              <div className="flex items-center bg-blue-500/10 rounded-lg py-3 px-4 w-fit">
+                <Star className="h-5 w-5 text-yellow-500 mr-2" />
+                <span className="font-medium">Trusted by 1.5M+ job seekers</span>
+              </div>
+              <div className="flex items-center space-x-6 mt-6">
+                <div className="flex flex-col items-center">
+                  <span className="text-2xl font-bold text-blue-600">98%</span>
+                  <span className="text-sm text-gray-600">Success rate</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span className="text-2xl font-bold text-blue-600">24/7</span>
+                  <span className="text-sm text-gray-600">Support</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <span className="text-2xl font-bold text-blue-600">4.9/5</span>
+                  <span className="text-sm text-gray-600">User rating</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Right side - Login form */}
-        <div className="flex-1 flex items-center justify-center p-6">
-          <div className="w-full max-w-md shadow-xl border border-gray-200 rounded-xl bg-white/95 backdrop-blur-sm p-6">
+        <div className="flex-1 flex items-center justify-center p-6 w-full md:w-1/2">
+          <div className="w-full max-w-md shadow-xl border border-gray-200 rounded-2xl bg-white/95 backdrop-blur-sm p-8 transition-all hover:shadow-2xl">
             <div className="space-y-2">
               <h2 className="text-3xl font-bold text-center text-gray-900">
                 Login
@@ -290,16 +309,22 @@ function Login({ setIsAuthenticated }) {
             </div>
             <div className="space-y-6 mt-6">
               {error && (
-                <div className="bg-red-500/10 text-red-600 p-3 rounded-md text-sm flex items-center">
+                <div className="bg-red-50 text-red-600 p-4 rounded-lg text-sm flex items-center border border-red-100">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                  </svg>
                   <span>{error}</span>
                 </div>
               )}
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="space-y-3">
                   <label
-                    className="text-sm font-medium text-gray-700"
+                    className="text-sm font-medium text-gray-700 flex items-center"
                     htmlFor="email"
                   >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
                     Email
                   </label>
                   <input
@@ -309,20 +334,23 @@ function Login({ setIsAuthenticated }) {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@example.com"
                     required
-                    className="w-full h-12 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all"
+                    className="w-full h-12 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all outline-none"
                   />
                 </div>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <label
-                      className="text-sm font-medium text-gray-700"
+                      className="text-sm font-medium text-gray-700 flex items-center"
                       htmlFor="password"
                     >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                      </svg>
                       Password
                     </label>
                     <Link
                       to="/forgot-password"
-                      className="text-xs text-blue-600 hover:underline"
+                      className="text-xs text-blue-600 hover:text-blue-800 hover:underline transition-colors"
                     >
                       Forgot password?
                     </Link>
@@ -334,12 +362,12 @@ function Login({ setIsAuthenticated }) {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
-                      className="w-full h-12 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all pr-12"
+                      className="w-full h-12 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all outline-none pr-12"
                     />
                     <button
                       type="button"
                       onClick={togglePasswordVisibility}
-                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700"
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700 transition-colors"
                     >
                       {showPassword ? (
                         <Eye className="h-5 w-5" />
@@ -354,7 +382,7 @@ function Login({ setIsAuthenticated }) {
                 </div>
                 <button
                   type="submit"
-                  className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all flex items-center justify-center"
+                  className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all flex items-center justify-center shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -376,14 +404,14 @@ function Login({ setIsAuthenticated }) {
                   <span className="w-full border-t border-gray-200" />
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-white px-3 text-gray-500">
+                  <span className="bg-white px-3 text-gray-500 font-medium">
                     Or continue with
                   </span>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <button
-                  className="h-12 border border-gray-300 hover:bg-gray-100 transition-all flex items-center justify-center rounded-lg"
+                  className="h-12 border border-gray-300 hover:bg-gray-50 transition-all flex items-center justify-center rounded-lg hover:shadow-md transform hover:-translate-y-0.5"
                 >
                   <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
                     <path
@@ -407,10 +435,10 @@ function Login({ setIsAuthenticated }) {
                   Google
                 </button>
                 <button
-                  className="h-12 border border-gray-300 hover:bg-gray-100 transition-all flex items-center justify-center rounded-lg"
+                  className="h-12 border border-gray-300 hover:bg-gray-50 transition-all flex items-center justify-center rounded-lg hover:shadow-md transform hover:-translate-y-0.5"
                 >
                   <svg
-                    className="mr-2 h-5 w-5"
+                    className="mr-2 h-5 w-5 text-blue-600"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -420,12 +448,12 @@ function Login({ setIsAuthenticated }) {
                 </button>
               </div>
             </div>
-            <div className="flex flex-col space-y-4 pt-4">
+            <div className="flex flex-col space-y-4 pt-6">
               <p className="text-center text-sm text-gray-600">
-                Don’t have an account?{" "}
+                Don't have an account?{" "}
                 <Link
                   to="/signup"
-                  className="text-blue-600 font-medium hover:underline inline-flex items-center"
+                  className="text-blue-600 font-medium hover:text-blue-800 hover:underline inline-flex items-center transition-colors"
                 >
                   Sign Up <ChevronRight className="h-4 w-4 ml-1" />
                 </Link>
@@ -457,21 +485,57 @@ function Login({ setIsAuthenticated }) {
       </div>
 
       {/* Footer */}
-      <footer className="bg-blue-600 text-white py-6 px-6 z-10">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-sm">
-            © {new Date().getFullYear()} QuickEmploye. All rights reserved.
+      <footer className="bg-gradient-to-r from-blue-600 to-blue-700 text-white py-8 px-6 z-10">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <h3 className="text-lg font-bold mb-4">QuickEmploye</h3>
+              <p className="text-blue-100 text-sm">
+                Your all-in-one platform for resume building, job applications, and career success.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-bold mb-4">Quick Links</h3>
+              <ul className="space-y-2 text-blue-100 text-sm">
+                <li><Link to="/templates" className="hover:text-white">Resume Templates</Link></li>
+                <li><Link to="/ats-score" className="hover:text-white">ATS Checker</Link></li>
+                <li><Link to="/work-history" className="hover:text-white">Work History Manager</Link></li>
+                <li><Link to="/faq" className="hover:text-white">FAQ</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-bold mb-4">Contact Us</h3>
+              <ul className="space-y-2 text-blue-100 text-sm">
+                <li className="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  support@quickemploye.com
+                </li>
+                <li className="flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  (123) 456-7890
+                </li>
+              </ul>
+            </div>
           </div>
-          <div className="flex gap-6 text-sm">
-            <Link to="/faq" className="hover:underline">
-              FAQ
-            </Link>
-            <Link to="/contact" className="hover:underline">
-              Contact
-            </Link>
-            <Link to="/privacy" className="hover:underline">
-              Privacy
-            </Link>
+          <div className="pt-6 border-t border-blue-500 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-sm text-blue-100">
+              © {new Date().getFullYear()} QuickEmploye. All rights reserved.
+            </div>
+            <div className="flex gap-6 text-sm text-blue-100">
+              <Link to="/privacy" className="hover:text-white">
+                Privacy Policy
+              </Link>
+              <Link to="/terms" className="hover:text-white">
+                Terms of Service
+              </Link>
+              <Link to="/cookies" className="hover:text-white">
+                Cookie Policy
+              </Link>
+            </div>
           </div>
         </div>
       </footer>
