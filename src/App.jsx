@@ -383,6 +383,7 @@ function App() {
                               onTemplateChange={handleTemplateChange}
                               themeOptions={themeOptions}
                               onThemeChange={handleThemeChange}
+                              setIsAuthenticated={setIsAuthenticated}
                             />
                           </div>
                         </header>

@@ -314,7 +314,7 @@ import axios from '../api/axios';
 import { useNavigate } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
 
-function TemplateSelector({ selectedTemplate, onTemplateChange, themeOptions, onThemeChange }) {
+function TemplateSelector({ selectedTemplate, onTemplateChange, themeOptions, onThemeChange,setIsAuthenticated }) {
   const [showThemeOptions, setShowThemeOptions] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
@@ -361,6 +361,8 @@ function TemplateSelector({ selectedTemplate, onTemplateChange, themeOptions, on
     localStorage.removeItem('token'); // Remove token
     setUserInfo(null); // Clear user info to trigger UI updates
     setShowProfileDropdown(false); // Close dropdown
+     // Update auth state
+  setIsAuthenticated(false); 
     navigate('/'); // Redirect to landing page
     // Dispatch a custom event to notify other components (e.g., sidebar)
     window.dispatchEvent(new Event('authChange'));
