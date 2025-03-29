@@ -184,74 +184,75 @@
 
 //new design 
 
-"use client"
-
-import { useState, useEffect } from "react" // NEW: Added useEffect for dynamic effects
-import { useNavigate, Link } from "react-router-dom"
-import { Eye, EyeOff, LogIn, ChevronRight, Star, ArrowRight } from "lucide-react" // NEW: Added Star, ArrowRight for modern UI
-import api from "../api/axios.js"
-
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { Eye, EyeOff, LogIn, ChevronRight, Star, ArrowRight } from "lucide-react";
+import api from "../api/axios.js";
 
 function Login({ setIsAuthenticated }) {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-  const [isLoading, setIsLoading] = useState(false)
-  const navigate = useNavigate()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   // Password visibility toggle
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword)
-  }
+    setShowPassword(!showPassword);
+  };
 
-  // NEW: State for dynamic header scroll effect (inspired by Landing.jsx)
-  const [isScrolled, setIsScrolled] = useState(false)
+  // State for dynamic header scroll effect
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  // NEW: Effect for scroll behavior to enhance modern feel
+  // Effect for scroll behavior
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsLoading(true)
+    e.preventDefault();
+    setIsLoading(true);
     try {
       const response = await api.post("/auth/login", {
         email,
         password,
-      })
-      localStorage.setItem("token", response.data.token)
-      setIsAuthenticated(true)
-      navigate("/dashboard")
+      });
+      localStorage.setItem("token", response.data.token);
+      setIsAuthenticated(true);
+      navigate("/dashboard");
     } catch (err) {
-      console.log(err)
-      setError("Invalid credentials")
+      console.log(err);
+      setError("Invalid credentials");
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen w-full flex flex-col bg-gray-50 relative overflow-hidden">
-      {/* NEW: Background gradient overlay for modern aesthetic */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/5 z-0" />
+      {/* Background gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-blue-500/5 z-0" />
 
-      {/* NEW: Sticky header inspired by Landing.jsx */}
-      <header className={`sticky top-0 z-20 px-6 py-4 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-transparent'}`}>
+      {/* Sticky header */}
+      <header
+        className={`sticky top-0 z-20 px-6 py-4 transition-all duration-300 ${
+          isScrolled ? "bg-white shadow-md" : "bg-transparent"
+        }`}
+      >
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <Link to="/" className="text-2xl font-bold flex items-center">
-            Quick<span className="text-primary">Employe</span>
+            Quick<span className="text-blue-600">Employe</span>
           </Link>
           <div className="flex space-x-4">
-            <Link to="/signup" className="text-primary hover:underline flex items-center">
+            <Link
+              to="/signup"
+              className="text-blue-600 hover:underline flex items-center"
+            >
               Sign Up <ArrowRight className="h-4 w-4 ml-1" />
             </Link>
           </div>
@@ -265,10 +266,11 @@ function Login({ setIsAuthenticated }) {
           <div className="max-w-md text-gray-800">
             <h1 className="text-4xl font-bold mb-6">Welcome Back</h1>
             <p className="text-lg mb-8">
-              Sign in to access your resume builder, ATS scores, and work history.
+              Sign in to access your resume builder, ATS scores, and work
+              history.
             </p>
-            {/* NEW: Trust indicator inspired by Landing.jsx */}
-            <div className="flex items-center bg-primary/10 rounded-lg py-2 px-4 w-fit">
+            {/* Trust indicator */}
+            <div className="flex items-center bg-blue-500/10 rounded-lg py-2 px-4 w-fit">
               <Star className="h-5 w-5 text-yellow-400 mr-2" />
               <span>Trusted by 1.5M+ job seekers</span>
             </div>
@@ -277,65 +279,82 @@ function Login({ setIsAuthenticated }) {
 
         {/* Right side - Login form */}
         <div className="flex-1 flex items-center justify-center p-6">
-          <Card className="w-full max-w-md shadow-xl border border-gray-200 rounded-xl bg-white/95 backdrop-blur-sm">
-            <CardHeader className="space-y-2">
-              <CardTitle className="text-3xl font-bold text-center text-gray-900">Login</CardTitle>
-              <CardDescription className="text-center text-gray-600">
+          <div className="w-full max-w-md shadow-xl border border-gray-200 rounded-xl bg-white/95 backdrop-blur-sm p-6">
+            <div className="space-y-2">
+              <h2 className="text-3xl font-bold text-center text-gray-900">
+                Login
+              </h2>
+              <p className="text-center text-gray-600">
                 Access your account to continue your job search journey
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
+              </p>
+            </div>
+            <div className="space-y-6 mt-6">
               {error && (
-                <div className="bg-destructive/10 text-destructive p-3 rounded-md text-sm flex items-center">
+                <div className="bg-red-500/10 text-red-600 p-3 rounded-md text-sm flex items-center">
                   <span>{error}</span>
                 </div>
               )}
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="space-y-3">
-                  <label className="text-sm font-medium text-gray-700" htmlFor="email">
+                  <label
+                    className="text-sm font-medium text-gray-700"
+                    htmlFor="email"
+                  >
                     Email
                   </label>
-                  <Input
+                  <input
                     id="email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@example.com"
                     required
-                    className="h-12 rounded-lg border-gray-300 focus:ring-primary focus:border-primary transition-all"
+                    className="w-full h-12 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all"
                   />
                 </div>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <label className="text-sm font-medium text-gray-700" htmlFor="password">
+                    <label
+                      className="text-sm font-medium text-gray-700"
+                      htmlFor="password"
+                    >
                       Password
                     </label>
-                    <Link to="/forgot-password" className="text-xs text-primary hover:underline">
+                    <Link
+                      to="/forgot-password"
+                      className="text-xs text-blue-600 hover:underline"
+                    >
                       Forgot password?
                     </Link>
                   </div>
                   <div className="relative">
-                    <Input
+                    <input
                       id="password"
                       type={showPassword ? "text" : "password"}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
-                      className="h-12 rounded-lg border-gray-300 focus:ring-primary focus:border-primary transition-all pr-12"
+                      className="w-full h-12 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all pr-12"
                     />
                     <button
                       type="button"
                       onClick={togglePasswordVisibility}
                       className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700"
                     >
-                      {showPassword ? <Eye className="h-5 w-5" /> : <EyeOff className="h-5 w-5" />}
-                      <span className="sr-only">{showPassword ? "Hide password" : "Show password"}</span>
+                      {showPassword ? (
+                        <Eye className="h-5 w-5" />
+                      ) : (
+                        <EyeOff className="h-5 w-5" />
+                      )}
+                      <span className="sr-only">
+                        {showPassword ? "Hide password" : "Show password"}
+                      </span>
                     </button>
                   </div>
                 </div>
-                <Button
+                <button
                   type="submit"
-                  className="w-full h-12 bg-primary hover:bg-primary/90 text-white rounded-lg font-semibold transition-all flex items-center justify-center"
+                  className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all flex items-center justify-center"
                   disabled={isLoading}
                 >
                   {isLoading ? (
@@ -348,22 +367,23 @@ function Login({ setIsAuthenticated }) {
                       <LogIn className="mr-2 h-5 w-5" /> Sign In
                     </div>
                   )}
-                </Button>
+                </button>
               </form>
 
-              {/* NEW: Social login buttons with modern hover effects */}
+              {/* Social login buttons */}
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
                   <span className="w-full border-t border-gray-200" />
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-white px-3 text-gray-500">Or continue with</span>
+                  <span className="bg-white px-3 text-gray-500">
+                    Or continue with
+                  </span>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                <Button
-                  variant="outline"
-                  className="h-12 border-gray-300 hover:bg-gray-100 transition-all flex items-center justify-center"
+                <button
+                  className="h-12 border border-gray-300 hover:bg-gray-100 transition-all flex items-center justify-center rounded-lg"
                 >
                   <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
                     <path
@@ -385,51 +405,78 @@ function Login({ setIsAuthenticated }) {
                     <path d="M1 1h22v22H1z" fill="none" />
                   </svg>
                   Google
-                </Button>
-                <Button
-                  variant="outline"
-                  className="h-12 border-gray-300 hover:bg-gray-100 transition-all flex items-center justify-center"
+                </button>
+                <button
+                  className="h-12 border border-gray-300 hover:bg-gray-100 transition-all flex items-center justify-center rounded-lg"
                 >
-                  <svg className="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg
+                    className="mr-2 h-5 w-5"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
                   </svg>
                   Facebook
-                </Button>
+                </button>
               </div>
-            </CardContent>
-            <CardFooter className="flex flex-col space-y-4 pt-0">
+            </div>
+            <div className="flex flex-col space-y-4 pt-4">
               <p className="text-center text-sm text-gray-600">
                 Don’t have an account?{" "}
-                <Link to="/signup" className="text-primary font-medium hover:underline inline-flex items-center">
+                <Link
+                  to="/signup"
+                  className="text-blue-600 font-medium hover:underline inline-flex items-center"
+                >
                   Sign Up <ChevronRight className="h-4 w-4 ml-1" />
                 </Link>
               </p>
-              {/* NEW: Added quick links inspired by Sidebar.jsx */}
+              {/* Quick links */}
               <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-500">
-                <Link to="/templates" className="hover:text-primary transition-colors">Templates</Link>
-                <Link to="/ats-score" className="hover:text-primary transition-colors">ATS Checker</Link>
-                <Link to="/work-history" className="hover:text-primary transition-colors">Work History</Link>
+                <Link
+                  to="/templates"
+                  className="hover:text-blue-600 transition-colors"
+                >
+                  Templates
+                </Link>
+                <Link
+                  to="/ats-score"
+                  className="hover:text-blue-600 transition-colors"
+                >
+                  ATS Checker
+                </Link>
+                <Link
+                  to="/work-history"
+                  className="hover:text-blue-600 transition-colors"
+                >
+                  Work History
+                </Link>
               </div>
-            </CardFooter>
-          </Card>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* NEW: Footer inspired by Landing.jsx */}
-      <footer className="bg-primary text-white py-6 px-6 z-10">
+      {/* Footer */}
+      <footer className="bg-blue-600 text-white py-6 px-6 z-10">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-sm">
             © {new Date().getFullYear()} QuickEmploye. All rights reserved.
           </div>
           <div className="flex gap-6 text-sm">
-            <Link to="/faq" className="hover:underline">FAQ</Link>
-            <Link to="/contact" className="hover:underline">Contact</Link>
-            <Link to="/privacy" className="hover:underline">Privacy</Link>
+            <Link to="/faq" className="hover:underline">
+              FAQ
+            </Link>
+            <Link to="/contact" className="hover:underline">
+              Contact
+            </Link>
+            <Link to="/privacy" className="hover:underline">
+              Privacy
+            </Link>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
