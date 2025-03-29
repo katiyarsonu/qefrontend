@@ -251,8 +251,8 @@ function Sidebar() {
   const navItems = [
     { id: 'home', label: 'Home', link: '/dashboard/home', icon: <FaHome size={20} /> },
     { id: 'resume', label: 'Resume Builder', link: '/dashboard/resume-builder', icon: <FaFileAlt size={20} /> },
-    { id: 'tracker', label: 'ATS Score', link: '/dashboard/ats-score', icon: <FaClipboardList size={20} /> },
-    { id: 'contacts', label: 'Contacts', link: '/dashboard/contacts', icon: <FaAddressBook size={20} /> },
+    { id: 'tracker', label: 'AI Optimizer', link: '/dashboard/ats', icon: <FaClipboardList size={20} /> },
+    { id: 'contacts', label: 'Score', link: '/dashboard/score', icon: <FaAddressBook size={20} /> },
     { id: 'companies', label: 'Companies', link: '/dashboard/companies', icon: <FaBuilding size={20} /> },
     { id: 'styles', label: 'History', link: '/dashboard/work-history', icon: <FaChartBar size={20} /> },
     { id: 'search', label: 'Job Search', link: '/dashboard/search', icon: <FaSearch size={20} /> },
@@ -282,7 +282,7 @@ function Sidebar() {
       {/* Added logo/branding at top */}
       {!isSidebarCollapsed && (
         <div className="p-4 border-b border-teal-700">
-          <h1 className="text-xl font-bold tracking-wide">ResumeCraft</h1>
+          <h1 className="text-xl font-bold tracking-wide">Dashboard</h1>
         </div>
       )}
       <div className="flex justify-end p-4">
@@ -341,7 +341,7 @@ function Sidebar() {
         <FaBars size={24} />
       </button>
       {/* Enhanced mobile header title */}
-      <div className="text-xl font-bold tracking-wide">ResumeCraft</div>
+      <div className="text-xl font-bold tracking-wide">Dashboard</div>
       <div className="w-6"></div> {/* Spacer for alignment */}
     </div>
   )
