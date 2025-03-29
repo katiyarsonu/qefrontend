@@ -368,7 +368,7 @@ function App() {
                   <Routes>
                     <Route index element={<Dashboard />} />
                     <Route path="home" element={<HomePage />} />
-                    <Route path="ats-score" element={<AtsScorePage />} />
+                    <Route path="ats" element={<AtsScorePage />} />
                     <Route path="work-history" element={<WorkHistoryPage />} />
                     <Route path="resume-builder" element={
                       // Enhanced resume builder UI with modern styling
